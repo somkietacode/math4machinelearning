@@ -14,16 +14,19 @@ class linearregression :
     X_transpose = self.training_data_X.transpose()
     self.ajk = np.matmul(X_transpose, self.training_data_X)
     self.Hessian = 2 * self.ajk
-    self.Beta = inv(self.ajk).dot(X_transpose).dot(self.training_data_Y)
-    f_of_X = self.training_data_X.dot(self.Beta)
+    Beta_ = np.matmul(inv(self.ajk), X_transpose) 
+    self.Beta = Beta_.dot(self.training_data_Y)
+    print(self.Beta)
+    f_of_X = np.matmul(self.training_data_X,self.Beta)
     self.rs = np.subtract(self.training_data_Y,f_of_X)
-    self.rss = self.rs.dot(self.rs)
+    print(self.rs)
+    self.rss = np.square(self.rs)
     return self.Beta , self.rss
     
 if __name__ == "__main__" :
-  x = np.matrix([[0,1][1,4][7,8]])
-  y = np.matrix([2,9,23])
+  x = np.matrix([[0,1],[1,4],[7,8]])
+  y = np.matrix([[2],[9],[23]])
   Lr = linearregression(x,y)
   Beta, rss = Lr.leastsquare()
-  print(Beta,rr)
+  print(Beta,rss)
     
