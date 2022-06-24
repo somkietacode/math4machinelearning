@@ -20,6 +20,13 @@ class linearregression :
     self.rs = np.subtract(self.training_data_Y,f_of_X)
     self.rss = np.square(self.rs)
     return self.Beta , self.rss
+  
+  def predict(self,x):
+    pading = np.ones(x.shape[0])
+    x = np.insert(x, 0, pading, axis=1)
+    print(x)
+    f_of_X = np.matmul(x,self.Beta)
+    return f_of_X
     
 if __name__ == "__main__" :
   x = np.matrix([[0,1],[1,4],[7,8],[50,23]])
@@ -28,3 +35,7 @@ if __name__ == "__main__" :
   Beta, rss = Lr.leastsquare()
   print(Beta)
   print(rss)
+  px = np.matrix([[4,7]])
+  r_y = Lr.predict(px)
+  print(r_y)
+  
