@@ -1,6 +1,6 @@
 import numpy as np
 
-class logisticregression :
+class lineardiscriminantananlysis :
   
   
 
@@ -37,7 +37,7 @@ class logisticregression :
       return classspecificmeanvector , X_i
 
     def get_cov():
-      cov = np.matmul(np.subtract(self.X_i , self.classspecificmeanvector), np.subtract(self.X_i , self.classspecificmeanvector).transpose() ).dot(1/(len(self.training_data_Y) - len(self.prioprobability) ))
+      cov = (self.X_i - self.classspecificmeanvector) * (self.X_i - self.classspecificmeanvector).T
       return cov
       
     
@@ -53,7 +53,8 @@ class logisticregression :
 if __name__ == "__main__" :
   x = np.matrix([[1,3],[2,3],[2,4],[3,1],[3,2],[4,2]])
   y = np.matrix([[1],[1],[1],[2],[2],[2]])
-  Lgr = logisticregression(x,y)
-  print(Lgr.prioprobability) 
-  print(Lgr.classspecificmeanvector)
-  print(Lgr.cov) 
+  Lda = lineardiscriminantananlysis(x,y)
+  print(Lda.prioprobability) 
+  print(Lda.classspecificmeanvector)
+  print(Lda.X_i)
+  print(Lda.cov) 
