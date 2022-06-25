@@ -3,9 +3,7 @@ import numpy as np
 class logisticregression :
   
   
-    
-  
-  
+
   def __init__(self,training_data_X, training_data_Y) :
     def get_priorprobability():
       P_y_eq_k = []
@@ -29,18 +27,27 @@ class logisticregression :
               i = 0
             id.append(i)
           if count == 0 :
-              classspecificmeanvector = np.matmul( np.matrix(id).dot(1/c_) , self.training_data_X)
-              count += 1
+            X_i = np.matmul( np.matrix(id) , self.training_data_X)
+            s = 1/c_
+            classspecificmeanvector = np.matmul( np.matrix(id).dot(s) , self.training_data_X)
+            count += 1
           else :
-            classspecificmeanvector = np.insert(classspecificmeanvector, 1, np.matmul(np.matrix(id).dot(1/c_) , self.training_data_X), axis=0)
-      return classspecificmeanvector
+            classspecificmeanvector = np.insert(classspecificmeanvector,1 ,  np.matmul(np.matrix(id).dot(1/c_) , self.training_data_X), axis=0)
+            X_i = np.insert( X_i , 1 , np.matmul( np.matrix(id) , self.training_data_X) , axis=0)
+      return classspecificmeanvector , X_i
+
+    def get_cov():
+      cov = np.matmul(np.subtract(self.X_i , self.classspecificmeanvector), np.subtract(self.X_i , self.classspecificmeanvector).transpose() ).dot(1/(len(self.training_data_Y) - len(self.prioprobability) ))
+      return cov
+      
     
     # Linear regression module init
     self.training_data_X = training_data_X # The training data x => features numpy_matrix
     self.training_data_Y = training_data_Y # The training data y => response numpy_matrix
     self.class_ = np.unique(self.training_data_Y, axis=0)
     self.prioprobability = get_priorprobability()
-    self.classspecificmeanvector = get_classspecificmeanvector()
+    self.classspecificmeanvector , self.X_i = get_classspecificmeanvector()
+    self.cov = get_cov()
     
 
 if __name__ == "__main__" :
@@ -48,4 +55,5 @@ if __name__ == "__main__" :
   y = np.matrix([[1],[1],[1],[2],[2],[2]])
   Lgr = logisticregression(x,y)
   print(Lgr.prioprobability) 
-  print(Lgr.classspecificmeanvector) 
+  print(Lgr.classspecificmeanvector)
+  print(Lgr.cov) 
