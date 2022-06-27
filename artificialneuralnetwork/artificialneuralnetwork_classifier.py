@@ -56,7 +56,7 @@ class artificialneuralnetwork_classifier :
   
   def predict(self,x):
     zi = np.matrix([[ self.THR.predict(x), self.LGR.predict(x) ]])
-    return LDA.predict(zi)
+    return self.LDA.predict(zi)
  
     
     
