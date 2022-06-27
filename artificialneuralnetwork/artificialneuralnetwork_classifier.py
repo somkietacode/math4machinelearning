@@ -4,7 +4,7 @@ from logisticregession import logisticregression as Lgr
 from lineardiscriminantanalysis import lineardiscriminantananlysis as Lda
 from tanhiperboliqueregression import tanhiperboliqueregression as Thr
 from softmaxregression import softmaxregression as sftmax
-
+import pandas as pd
 
 class artificialneuralnetwork_classifier :
 
@@ -63,8 +63,15 @@ class artificialneuralnetwork_classifier :
 
 
 if __name__ == "__main__" :
-  x = np.matrix([[1,3],[2,4],[4,1],[3,1],[4,2] ])
-  y = np.matrix([[0],[0],[0],[1],[1] ] )
+  def pre_x(x):
+      x_ = np.matrix( x )
+      print(x_ , "--->" , Ann.predict(x_))
+  df = pd.read_csv('admission_data.csv')
+  df = df.apply(pd.to_numeric, errors='coerce')
+  df = df.dropna()
+  x = np.matrix(df[["GRE Score","TOEFL Score","University Rating","SOP","LOR ","CGPA"]].to_numpy() )
+  y = np.matrix(df[["Research"]].to_numpy())
   Ann = artificialneuralnetwork_classifier(x,y)
-  x_ = np.matrix([[7,2] ])
-  print(Ann.predict(x_))
+  pre_x([[318,110,3,4,3,8.8] ])
+  pre_x([[321,110,3,3.5,5,8.85] ])
+  pre_x([[324,112,4,4,2.5,8.1] ])
