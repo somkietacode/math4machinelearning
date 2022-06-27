@@ -20,5 +20,5 @@ The main idea of this project is to implement a set of mathematical tool kit for
 ## How to use ?
 
 - First download the repo :
-``git clone https://github.com/somkietacode/math4machinelearning``
+`git clone https://github.com/somkietacode/math4machinelearning`
 
