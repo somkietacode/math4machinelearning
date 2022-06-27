@@ -52,9 +52,8 @@ class lineardiscriminantananlysis :
     self.sigma = get_sigma()
 
   def predict(self , x):
-      print(self.training_data_X.T , x.T)
       s =  ( self.classspecificmeanvector * inv(self.sigma) * x.T ) + 0.5 * ((self.classspecificmeanvector * inv(self.sigma) ) * self.classspecificmeanvector.T) + np.log(self.prioprobability)
-      print( self.class_[np.argmax(np.sum(s,axis=1))][0] ) 
+      return self.class_[np.argmax(np.sum(s,axis=1))][0]
 
 if __name__ == "__main__" :
   x = np.matrix([[1,3],[2,3],[2,4],[3,1],[3,2],[4,2] ])
