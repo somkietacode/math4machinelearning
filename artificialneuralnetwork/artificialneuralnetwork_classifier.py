@@ -8,7 +8,7 @@ from softmaxregression import softmaxregression as sftmax
 
 class artificialneuralnetwork_classifier :
 
-  
+
   def __init__ (self,training_data_X, training_data_Y) :
 
     def apply_classification ():
@@ -21,13 +21,14 @@ class artificialneuralnetwork_classifier :
             zi = np.insert(zi , 0 , np.matrix([[THR.predict(j), LGR.predict(j)  ]]) , axis=0)
           k += 1
       zi = np.flip(zi,0)
-      return LDA = Lda(zi,self.training_data_Y)
-      
-          
-    
+      LDA = Lda(zi,self.training_data_Y)
+      return LDA
+
+
+
     pading = np.ones(training_data_X.shape[0])
     #self.training_data_X = np.insert(training_data_X, 0, pading, axis=1) # The training data x => features numpy_matrix
-    self.training_data_X = training_data_X 
+    self.training_data_X = training_data_X
     self.training_data_Y = training_data_Y # The training data y => response numpy_matrix
     Lr = LR(self.training_data_X,self.training_data_Y)
     alpha_1, rss = Lr.leastsquare()
@@ -53,17 +54,17 @@ class artificialneuralnetwork_classifier :
     self.THR = THR
     self.LGR = LGR
     self.LDA = LDA
-  
+
   def predict(self,x):
     zi = np.matrix([[ self.THR.predict(x), self.LGR.predict(x) ]])
     return self.LDA.predict(zi)
- 
-    
-    
+
+
+
 
 if __name__ == "__main__" :
   x = np.matrix([[1,3],[2,4],[4,1],[3,1],[4,2] ])
   y = np.matrix([[0],[0],[0],[1],[1] ] )
   Ann = artificialneuralnetwork_classifier(x,y)
-  x_ = np.matrix([[1,3] ])
+  x_ = np.matrix([[7,2] ])
   print(Ann.predict(x_))
