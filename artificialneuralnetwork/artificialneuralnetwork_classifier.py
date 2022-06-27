@@ -65,4 +65,5 @@ if __name__ == "__main__" :
   x = np.matrix([[1,3],[2,4],[4,1],[3,1],[4,2] ])
   y = np.matrix([[0],[0],[0],[1],[1] ] )
   Ann = artificialneuralnetwork_classifier(x,y)
-  print(Ann.predict(x))
+  x_ = np.matrix([[1,3] ])
+  print(Ann.predict(x_))
